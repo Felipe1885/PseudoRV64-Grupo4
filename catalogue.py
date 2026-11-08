@@ -32,6 +32,9 @@ def _type_of(node):
 def _is_bool(node):
     return _type_of(node) == TypeName.BOOL
 
+def _is_non_void(node):
+    return _type_of(node) in (TypeName.INT, TypeName.BOOL)
+
 def catalogue():
     """Codifique o catálogo do enunciado com Rule e Pattern."""
     #raise NotImplementedError("implemente o catálogo")
@@ -140,5 +143,16 @@ def catalogue():
     rules.append(Rule("identificador_bool_cond", COND,
                       Pattern(IdentifierExpr, predicate=_is_bool),
                       2, "emitir_identificador_cond"))
+
+    # Chamadas de função
+    rules.append(Rule("chamada_reg", REG,
+                      Pattern(CallExpr, children=(Args(REG),), predicate=_is_non_void),
+                      1, "emitir_chamada_reg"))
+    rules.append(Rule("chamada_void", EFFECT,
+                      Pattern(CallExpr, children=(Args(REG),)),
+                      1, "emitir_call_effect"))
+    rules.append(Rule("chamada_bool_cond", COND,
+                      Pattern(CallExpr, children=(Args(REG),), predicate=_is_bool),
+                      3, "emitir_call_cond"))
 
     return rules
