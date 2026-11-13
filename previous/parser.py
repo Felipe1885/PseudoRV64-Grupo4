@@ -489,7 +489,7 @@ class Parser:
         if (self.match(TokenKind.LEFT_PAREN)):
             expression = self.parse_expression()
             self.expect(TokenKind.RIGHT_PAREN)
-            return Expr(value=expression, span=self._span(start, expression))
+            return expression
         if (self.match(TokenKind.IDENTIFIER)):
             if self.match(TokenKind.LEFT_PAREN):
                 arguments = self.parse_arguments()

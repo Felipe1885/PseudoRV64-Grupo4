@@ -14,7 +14,6 @@ class Selector:
         table = SelectionTable()
         self._visit(expr, table)
         return table
-        #raise NotImplementedError("implemente matching e DP")
 
     def _visit(self, node, table: SelectionTable):
         # Calcula a tabela para os filhos do nó

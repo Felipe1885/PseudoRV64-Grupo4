@@ -37,7 +37,6 @@ def _is_non_void(node):
 
 def catalogue():
     """Codifique o catálogo do enunciado com Rule e Pattern."""
-    #raise NotImplementedError("implemente o catálogo")
     rules = []
 
     # Folhas
